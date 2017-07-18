@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Slick Playground</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="./slick/slick.css">
+  <link rel="stylesheet" type="text/css" href="./slick/slick-theme.css">
+  <link rel="stylesheet" type="text/css" href="./main.css">
+</head>
+<body>
+
+	<section class="regular slider">
+		{{#each images}}
+		<div>
+			<img class="mainImg" src="images/{{file}}" data-name="{{name}}" data-labeles="{{labeles}}">
+		</div>
+		{{/each}}
+	</section>
+	<section class="labeles-list list">
+		<div class="wrapper">
+			<span class="listName">Current Labeles</span>
+			<ul class="labeles-container labeles"></ul>
+		</div>
+		<div class="wrapper">
+			<span class="listName">Full list</span>
+			<ul class="all-labeles-container labeles">
+				<li class="main-label label">slash_burn</li>
+				<li class="main-label label">conventional_mine</li>
+				<li class="main-label label">primary</li>
+				<li class="main-label label">water</li>
+				<li class="main-label label">cultivation</li>
+				<li class="main-label label">artisinal_mine</li>
+				<li class="main-label label">blooming</li>
+				<li class="main-label label">bare_ground</li>
+				<li class="main-label label">blow_down</li>
+				<li class="main-label label">agriculture</li>
+				<li class="main-label label">road</li>
+				<li class="main-label label">selective_logging</li>
+				<li class="main-label label">clear</li>
+				<li class="main-label label">partly_cloudy</li>
+				<li class="main-label label">cloudy</li>
+				<li class="main-label label">haze</li>
+			</ul>
+		</div>
+		<button class="finish">Finish</button>
+	</section>
+  <script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
+  <script src="./slick/slick.js" type="text/javascript" charset="utf-8"></script>
+  <script src="main.js" type="text/javascript" charset="utf-8"></script>
+
+</body>
+</html>

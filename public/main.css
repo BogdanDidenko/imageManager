@@ -1,0 +1,80 @@
+html, body {
+	  margin: 0;
+	  padding: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.slider {
+    width: 315px;
+    margin: 50px auto;
+}
+
+.slick-slide {
+    margin: 0px 20px;
+}
+
+.slick-slide img {
+    width: 280px;
+    height: 280px;
+}
+
+.slick-prev:before,
+.slick-next:before {
+    color: black;
+}
+.labeles{
+}
+.listName{
+    vertical-align: middle;
+}
+.labeles-list{
+    width: 290px;
+    margin: 20px auto;
+}
+.wrapper{
+    display: inline-block;
+     vertical-align: top; 
+}
+.labeles{
+
+    /*display: inline-block;*/
+    vertical-align: top; 
+    width: 140px;
+    padding: 0px;
+    margin: 15px 0px;
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.labeles .label{
+ list-style-type: none;
+ cursor: pointer;
+ position: relative;
+}
+.labeles-list .variable-label:hover{
+background-color: #f88;
+}
+.labeles-list .main-label:hover {
+    background-color: #5f5;
+}
+
+.labeles-list .variable-label:hover:after{
+    position: absolute;
+    top:0px;
+    right:5px;
+    content: 'X';
+    font-size: 20px;
+    width: 24px;
+    height: 24px;
+}
+
+.slick-arrow{
+    display: none!important;
+}
+
+.finish{
+    font-size: 24px;
+    cursor: pointer;
+}
