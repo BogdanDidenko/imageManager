@@ -45,17 +45,11 @@ $(document).on('ready', function() {
     });
     function sendLabeles() {
         var newData = {};
-        $('.slick-slide:not(.slick-cloned) .mainImg').each(function(i, el) {
-
-            var name = el.getAttribute('data-name');
-            var labeles = el.getAttribute('data-labeles');
-            newData[name] = labeles.trim();
-        });
         $.ajax({
             url: "/data",
             method: "POST",
             dataType: "json",
-            data: newData,
+            data: {data:images},
             success: function() {
                 $("#message").html('File saved.');
                 $("#message").show(0).delay(1000).fadeOut();
@@ -66,6 +60,8 @@ $(document).on('ready', function() {
         return $('.slick-current').find('.mainImg').get(0).getAttribute('data-labeles');
     }
     function setCurLabeles(labeles) {
+        var image = images[indexImage]
+        image.labeles = labeles;
         $('.slick-current').find('.mainImg').get(0).setAttribute('data-labeles', labeles);
     }
     function outLables() {
@@ -93,8 +89,8 @@ $(document).on('ready', function() {
     $(document).on('click', '.variable-label', function() {
         var label = $(this).html();
         curLabeles = getCurLabeles();
-        curLabeles = curLabeles.replace(label, '');
-        setCurLabeles(curLabeles.trim());
+        curLabeles = curLabeles.replace(label, '').trim();
+        setCurLabeles(curLabeles);
         $(this).remove();
     })
     $(document).on('click', '.main-label', function() {

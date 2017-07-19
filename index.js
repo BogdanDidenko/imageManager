@@ -53,14 +53,10 @@ function ensureDirectoryExistence(filePath) {
 function writeData(data) {
     var dataToWrite = [],
         filePath = './result/updated_train.csv';
-    for(var k in data) {
-        images[k].labeles = data[k];
-        imagesLabels[k] = data[k];
-    }
-    for(k in imagesLabels) {
+    for(var i = 0 ; i < data.length; i +=1){
         dataToWrite.push({
-            image_name: k,
-            tags: imagesLabels[k],
+            image_name: data[i].name,
+            tags: data[i].labeles
         })
     }
     var csv = json2csv({ data: dataToWrite, fields: fields });
@@ -108,7 +104,7 @@ app.get('/', function(req, res) {
 });
 
 app.post('/data', function(req, res) {
-    var data = req.body;
+    var data = req.body.data;
     writeData(data);
     res.json({status:'OK'});
     //  res.render('index', {
