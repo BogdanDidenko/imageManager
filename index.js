@@ -5,6 +5,7 @@ var nodeGallery = require('node-gallery');
 var csv = require('csv-parser')
 var fs = require('fs')
 var json2csv = require('json2csv');
+var path = require('path');
 
 var stream = csv({
   raw: false,     // do not decode to utf-8 strings 
@@ -40,8 +41,18 @@ fs.createReadStream('./labels/train.csv')
         //console.log(imagesLabels);
     })
 
+function ensureDirectoryExistence(filePath) {
+    var dirname = path.dirname(filePath);
+    if (fs.existsSync(dirname)) {
+        return true;
+    }
+    ensureDirectoryExistence(dirname);
+    fs.mkdirSync(dirname);
+}
+
 function writeData(data) {
-    var dataToWrite = []
+    var dataToWrite = [],
+        filePath = './result/updated_train.csv';
     for(var k in data) {
         images[k].labeles = data[k];
         imagesLabels[k] = data[k];
@@ -53,7 +64,8 @@ function writeData(data) {
         })
     }
     var csv = json2csv({ data: dataToWrite, fields: fields });
-    fs.writeFile('./result/updated_train.csv', csv, function(err) {
+    ensureDirectoryExistence(filePath);
+    fs.writeFile(filePath, csv, function(err) {
         if (err) throw err;
         console.log('file saved');
     });
