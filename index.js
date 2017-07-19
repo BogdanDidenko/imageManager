@@ -103,16 +103,30 @@ app.set('view engine', 'hbs');
 
 // // This route handles GET requests to our root ngrok address and responds with the same "Ngrok is working message" we used before
 app.get('/', function(req, res) {
-     res.render('index', {
-         images: images
-     });
+     res.render('index');
     //res.sendFile(__dirname + '/public/index.html');
 });
 
 app.post('/data', function(req, res) {
     var data = req.body;
     writeData(data);
-    res.end();
+    res.json({status:'OK'});
+    //  res.render('index', {
+    //      images: images
+    //  });
+    //res.sendFile(__dirname + '/public/index.html');
+});
+
+app.post('/imagesList', function(req, res) {
+    var data = [];
+    for(var k in images) {
+        data.push({
+            name: images[k].name,
+            file: images[k].file,
+            labeles: images[k].labeles
+        });
+    }
+    res.json(data);
     //  res.render('index', {
     //      images: images
     //  });

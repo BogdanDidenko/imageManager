@@ -17,6 +17,32 @@ $(document).on('ready', function() {
         'cloudy',
         'haze'
     ]
+    var indexImage = 0;
+    function printImages(index) {
+        index = (index >= 0) ? index : 0;
+        var imageObj = images[index],
+            imageHtml = $('.slick-current').find('.mainImg').get(0);
+        imageHtml.src = 'images/' + imageObj.file;
+        imageHtml.setAttribute('data-name', imageObj.name);
+        imageHtml.setAttribute('data-labeles', imageObj.labeles);
+    }
+    var images;
+    $.ajax({
+        url: "/imagesList",
+        method: "POST",
+        success: function(data) {
+            images = data;
+            $(".regular").slick({
+                //dots: true,
+                infinite: true,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                speed: 0
+            });
+            printImages(indexImage);
+            outLables();
+        }
+    });
     function sendLabeles() {
         var newData = {};
         $('.slick-slide:not(.slick-cloned) .mainImg').each(function(i, el) {
@@ -24,21 +50,23 @@ $(document).on('ready', function() {
             var name = el.getAttribute('data-name');
             var labeles = el.getAttribute('data-labeles');
             newData[name] = labeles.trim();
-        })
+        });
         $.ajax({
             url: "/data",
             method: "POST",
             dataType: "json",
-            data: newData
-        })
+            data: newData,
+            success: function() {
+                $("#message").html('File saved.');
+                $("#message").show(0).delay(1000).fadeOut();
+            }
+        });
     }
     function getCurLabeles() {
         return $('.slick-current').find('.mainImg').get(0).getAttribute('data-labeles');
     }
     function setCurLabeles(labeles) {
-        $('.slick-current').find('.mainImg').get(0).setAttribute('data-labeles', labeles)
-        var c = getCurLabeles();
-        c
+        $('.slick-current').find('.mainImg').get(0).setAttribute('data-labeles', labeles);
     }
     function outLables() {
         var curLabeles = getCurLabeles();
@@ -53,10 +81,12 @@ $(document).on('ready', function() {
 
     $(window).bind('mousewheel', function(event) {
         if (event.originalEvent.wheelDelta >= 0) {
-            $(".regular").slick('slickNext')
+            $(".regular").slick('slickNext');
+            printImages(indexImage +=1 );
         }
         else {
             $(".regular").slick('slickPrev');
+            printImages(indexImage -=1 );
         }
         outLables();
     });
@@ -76,14 +106,6 @@ $(document).on('ready', function() {
         }
     })
     $('.finish').on('click', sendLabeles);
-    
-    $(".regular").slick({
-        //dots: true,
-        infinite: true,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        speed: 0
-    });
+ 
 
-    outLables();
 });

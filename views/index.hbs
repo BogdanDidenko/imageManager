@@ -10,11 +10,12 @@
 <body>
 
 	<section class="regular slider">
-		{{#each images}}
 		<div>
-			<img class="mainImg" src="images/{{file}}" data-name="{{name}}" data-labeles="{{labeles}}">
+			<img id="i1" class="mainImg" src="" data-name="" data-labeles="">
 		</div>
-		{{/each}}
+		<div>
+			<img id="i2" class="mainImg" src="" data-name="" data-labeles="">
+		</div>
 	</section>
 	<section class="labeles-list list">
 		<div class="wrapper">
@@ -44,6 +45,7 @@
 		</div>
 		<button class="finish">Finish</button>
 	</section>
+	<div id="message"></div>
   <script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
   <script src="./slick/slick.js" type="text/javascript" charset="utf-8"></script>
   <script src="main.js" type="text/javascript" charset="utf-8"></script>
